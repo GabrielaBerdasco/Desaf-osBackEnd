@@ -114,3 +114,5 @@ const newContent = new Container("./products.txt")
 
 /* newContent.saveObject("Botella de agua", 780, "https://dl.dropboxusercontent.com/s/ig08109teihkjv1/YerberaNegra.jpeg?dl=0")
  */
+
+module.exports = Container
