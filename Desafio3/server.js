@@ -1,6 +1,6 @@
 const express = require('express')
-const product = require('./controllers/productController') 
-const allProducts = require('./controllers/productController')
+const product = require('./controllers/randomProductController') 
+const allProducts = require('./controllers/productsController')
 
 const app = express()
 
@@ -11,15 +11,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-    const products = allProducts()
-    console.log(products);
-    res.send(products)
+    /* const products = async () => {
+        console.log(await allProducts());
+        return await allProducts()
+    } */
+    allProducts().then(products => res.send(products))
+    
 })
 
 app.get('/randomProduct', (req, res) => {
-    const randomProduct = product()
-    console.log(randomProduct);
-    res.send(randomProduct)
+    product().then(p => res.send(p));
 })
 
 
