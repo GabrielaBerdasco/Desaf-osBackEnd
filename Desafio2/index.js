@@ -102,17 +102,22 @@ class Container{
 
 const newContent = new Container("./products.txt")
 
-/* newContent.writeFile(products) */
+newContent.writeFile(products)
 
-/* newContent.deleteAll() */
+const main = async () => {
+    
+    await newContent.getAll()
+    
+    await newContent.getById(3)
+    
+    await newContent.deleteById(5)
+    
+    await newContent.saveObject("Botella de agua", 780, "https://dl.dropboxusercontent.com/s/ig08109teihkjv1/YerberaNegra.jpeg?dl=0")
+   
+    /* await newContent.deleteAll() */
 
-/* newContent.deleteById(5) */
+}
 
-/* newContent.getAll() */
-
-/* newContent.getById(3) */
-
-/* newContent.saveObject("Botella de agua", 780, "https://dl.dropboxusercontent.com/s/ig08109teihkjv1/YerberaNegra.jpeg?dl=0")
- */
+main()
 
 module.exports = Container
