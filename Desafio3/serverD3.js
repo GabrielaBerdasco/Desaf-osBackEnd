@@ -11,10 +11,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-    /* const products = async () => {
-        console.log(await allProducts());
-        return await allProducts()
-    } */
     allProducts().then(products => res.send(products))
     
 })
