@@ -7,6 +7,8 @@ const routerProducts = Router()
 app.use('/api/products', routerProducts)
 
 routerProducts.use(express.json())
+routerProducts.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
 const products = [{
     id: 1,
@@ -19,7 +21,7 @@ const products = [{
     price: 200
     
 }]
-const id = 0
+
 
 routerProducts.get('/', (req, res) => {
     res.json(products)
@@ -28,18 +30,19 @@ routerProducts.get('/', (req, res) => {
 routerProducts.get('/:id', (req, res) => {
     const { id } = req.params
     const product = products.find(product => product.id == id)
+    if(!product) return res.status(404).send('Producto no encontrado')
     res.json(product)
 })
 
-routerProducts.post('/save', (req, res) => {
+routerProducts.post('/', (req, res) => {
     let product = req.body
     products.push(product)
-    let index = products.product.indexOf(product)
+    let index = products.indexOf(product)
     product.id = index + 1
     res.json(product)
 })
 
-routerProducts.put('/modificar/:id', (req, res) => {
+routerProducts.put('/:id', (req, res) => {
     const { id } = req.params
     const product = products.find(product => product.id == id)
     const { name, price } = req.body
@@ -48,8 +51,11 @@ routerProducts.put('/modificar/:id', (req, res) => {
     res.json(product)
 })
 
-routerProducts.delete('/api/products', (req, res) => {
-    
+routerProducts.delete('/:id', (req, res) => {
+    const { id } = req.params
+    const productsF = products.find(product => product.id == id)
+    products.splice(products.indexOf(productsF), 1)
+    res.json(products)
 })
 
 app.use('/api', routerProducts)
